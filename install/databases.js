@@ -68,6 +68,12 @@ function saveDatabaseConfig(config, databaseConfig) {
 			password: databaseConfig['mongo:password'],
 			database: databaseConfig['mongo:database'],
 			uri: databaseConfig['mongo:uri'],
+		},
+		config.redis = {
+			host: databaseConfig['redis:host'],
+			port: databaseConfig['redis:port'],
+			password: databaseConfig['redis:password'],
+			database: databaseConfig['redis:database'],
 		};
 	} else if (config.database === 'postgres') {
 		config.postgres = {
