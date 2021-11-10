@@ -32,6 +32,9 @@ async function getDatabaseConfig(config) {
 	} else if (config.database === 'mongo') {
 		if ((config['mongo:host'] && config['mongo:port']) || config['mongo:uri']) {
 			return config;
+		} else if (config.database === 'mongoredis') {
+		if ((config['mongo:host'] && config['mongo:port']) || config['mongo:uri']) {
+			return config;
 		}
 		return await promptGet(questions.mongo);
 	} else if (config.database === 'postgres') {
@@ -68,13 +71,23 @@ function saveDatabaseConfig(config, databaseConfig) {
 			password: databaseConfig['mongo:password'],
 			database: databaseConfig['mongo:database'],
 			uri: databaseConfig['mongo:uri'],
+		};
+	} else if (config.database === 'mongoredis') {
+		config.mongo = {
+			host: databaseConfig['mongo:host'],
+			port: databaseConfig['mongo:port'],
+			username: databaseConfig['mongo:username'],
+			password: databaseConfig['mongo:password'],
+			database: databaseConfig['mongo:database'],
+			uri: databaseConfig['mongo:uri'],
 		},
 		config.redis = {
 			host: databaseConfig['redis:host'],
 			port: databaseConfig['redis:port'],
 			password: databaseConfig['redis:password'],
 			database: databaseConfig['redis:database'],
-		};
+		},
+		isCluster: true;
 	} else if (config.database === 'postgres') {
 		config.postgres = {
 			host: databaseConfig['postgres:host'],
