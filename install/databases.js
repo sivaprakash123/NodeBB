@@ -88,8 +88,7 @@ function saveDatabaseConfig(config, databaseConfig) {
 			port: databaseConfig['redis:port'],
 			password: databaseConfig['redis:password'],
 			database: databaseConfig['redis:database'],
-		},
-		isCluster: true;
+		};
 	} else if (config.database === 'postgres') {
 		config.postgres = {
 			host: databaseConfig['postgres:host'],
