@@ -6,7 +6,7 @@ const winston = require('winston');
 const util = require('util');
 
 const promptGet = util.promisify((schema, callback) => prompt.get(schema, callback));
-
+const isCluster = true;
 const questions = {
 	redis: require('../src/database/redis').questions,
 	mongo: require('../src/database/mongo').questions,
